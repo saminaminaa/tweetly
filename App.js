@@ -1,68 +1,82 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-// import App from './containers/App/App'
+import Expo from 'expo'
+import React, {Component} from 'react'
+import {View, Text, TouchableWithoutFeedback } from 'react-native'
+import styles from './styles/App.styles'
+import {Icon} from 'react-native-elements'
+import AppOff from './containers/AppOff'
+import Test from './containers/Test'
 
-// import Expo from 'expo';
-// import * as Expo from 'expo'
-import React, { Component } from "react";
-import { Text, View, Image, ScrollView } from "react-native";
-// import {AppOff} from './containers/AppOff/AppOff'
-import styles from "./containers/AppOff/AppOff.styles";
+class Main extends Component{
+    state = {
+        currentTab: 'AppOff'
+    }
 
-import tweets from "./constants/tweet";
-import Tweet from "./components/Tweet";
-import TweetBox from "./components/TweetBox";
-import format from "date-fns/format";
-// import { v4 as uuidv4 } from "uuid";
-// import uniqid from 'uniqid';
+    _changeTab = tabName => this.setState({currentTab: tabName})
 
-// const App = () => (
-//     <View style={styles.App}>
-//         <TweetBox/>
-//         {tweets.map((props, index) => (
-//             <Tweet
-//             key={index} {...props}
-//             />
-//         ))}
-//         {/* <AppOff/> */}
-//     </View>
-// )
+    _renderTab = () => {
+        const {currentTab} = this.state;
 
-class App extends Component {
-  state = { tweets };
+        switch(currentTab) {
+            case 'AppOff': //si c egal à app alors...
+                return <AppOff/>
+            case 'Test':
+                return <Test/>
+            default:
+                return <AppOff/>
+        }
+    }
 
-  _updateTweets = (newTweet) => {
-    //sans accolade = ça return direct ce qu'il y a apres
-    // var uniqid = require('uniqid'); 
-    this.setState({
-      tweets: [
-        {
-          _id: 6,
-          date: format(new Date(), 'dd/MM/yyyy'),
-          username: "Noémie",
-          tweet: newTweet,
-          avatar: "https://picsum.photos/50/50",
-        },
-        ...this.state.tweets,
-      ],
-    });
-  };
-
-  render() {
-    const { tweets } = this.state;
-
-    return (
-      <View style={styles.App}>
-        <TweetBox addTweet={this._updateTweets} />
-        <ScrollView>
-          {tweets.map((props, index) => (
-            <Tweet key={index} {...props} />
-          ))}
-        </ScrollView>
-      </View>
-    );
-  }
+    render(){
+        const current = this._renderTab()
+        return(
+            <View style={styles.Main}>
+                {current}
+                <View style={styles.Tabs}>
+                    <TouchableWithoutFeedback onPress={() => this._changeTab('AppOff') /* pour utiliser une methode avc des parametres, utiliser la syntaxe "() => nommethode" */}>
+                        <View style={styles.Tab}>
+                            <Text>
+                                <Icon
+                                    name='twitter'
+                                    type='ant-design'
+                                />
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => this._changeTab('Test')}>
+                        <View style={styles.Tab}>
+                            <Text>
+                                <Icon
+                                    name='search'
+                                    type='feather'
+                                />
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => this._changeTab('Test')}>
+                        <View style={styles.Tab}>
+                            <Text>
+                                <Icon
+                                    name='bell'
+                                    type='fontisto'
+                                />
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => this._changeTab('Test')}>
+                        <View style={styles.Tab}>
+                            <Text>
+                                <Icon
+                                    name='mail'
+                                    type='feather'
+                                />
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
+            </View>
+        )
+    }
 }
 
-export default App;
-// Expo.registerRootComponent(AppOff);
+// Expo.registerRootComponent(Main)
+export default Main;

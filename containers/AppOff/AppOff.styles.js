@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,//signifie que cv prendre tte la largeur dispo
         backgroundColor: colors.lightblue,
         justifyContent: 'center',
+        paddingTop: 45,
     },
     Titre: {
         textAlign: "center",

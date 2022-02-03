@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     count: {
-        marginTop: 50,
+        marginTop: 10,
     },
     Button: {
-        marginTop: 100,
+        marginTop: 3,
         color: colors.primary,
     },
 })

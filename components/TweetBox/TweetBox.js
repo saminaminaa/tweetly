@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import { View, Text, TextInput, Button, Keyboard } from 'react-native';
+import { View, Text, TextInput, Keyboard } from 'react-native';
+import { Button } from "react-native-elements";
 // import TweetBox from ".";
 
 import styles from './TweetBox.styles';
@@ -41,10 +42,13 @@ class TweetBox extends Component{
                     multiline
                 />
                 <Button
+                    large
+                    icon={{name: 'add-circle-sharp', type: 'ionicon', color: 'white'}}
                     onPress={this._submitNewTweet}
                     title="Ajouter un nouveau tweet"
                     color={colors.primary}
-                    style={styles.Button}
+                    containerStyle={styles.Button}
+                    disabled={value.length < 1}
                 />
             </View>
         )
