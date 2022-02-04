@@ -9,7 +9,20 @@ import {
 import styles from "./Tweet.styles";
 
 const Tweet = ({ date, tweet, username, avatar }) => (
-  <TouchableWithoutFeedback>
+  <TouchableWithoutFeedback
+    onPress={() =>  Alert.alert(
+      "Info du tweet",
+      tweet,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    )}
+  >
     <View style={styles.Tweet}>
       <View style={styles.left}>
         <Image source={{ uri: avatar }} style={styles.avatar} />
